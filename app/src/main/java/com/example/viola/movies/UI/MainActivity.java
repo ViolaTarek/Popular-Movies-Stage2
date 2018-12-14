@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private MovieAdapter adapter;
     private List<Movie> movies;
     private FavoriteViewModel favoriteViewModel;
-    Bundle mBundleRecyclerViewState;
 
     SharedPreferences sharedPreferences;
     String pref_key;
@@ -57,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     String RECYCLER_STATE_KEY;
     public static final String TAG = MovieAdapter.class.getName();
     int flag=1;
-
+    private Parcelable savedRecyclerViewState;
+    private final String LIST_STATE = "recycler_state";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,17 +75,19 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String pref = sharedPreferences.getString(pref_key,popular_key);
+
+        initViews();
         if(pref.equals(popular_key)){
-            initViews();
+           // initViews();
             loadJSON();
             //checked
         }
         else if(pref.equals(top_rated_key)){
-            initViews();
+           // initViews();
             loadJSON1();
         }
         else if(pref.equals(Favorite)){
-            initViews();
+           // initViews();
             getFavorite();
         }
 
@@ -139,7 +141,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<fetchMovies> call, Response<fetchMovies> response) {
                     List<Movie> movies =response.body().getResults();
                     recyclerView.setAdapter(new MovieAdapter(getApplicationContext(),movies));
-                    recyclerView.smoothScrollToPosition(0);
+                   // recyclerView.smoothScrollToPosition(0);
+                    restorePosition();
 
                 }
                 @Override
@@ -170,7 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<fetchMovies> call, Response<fetchMovies> response) {
                     List<Movie> movies= response.body().getResults();
                     recyclerView.setAdapter(new MovieAdapter(getApplicationContext(),movies));
-                    recyclerView.smoothScrollToPosition(0);
+                    //recyclerView.smoothScrollToPosition(0);
+                    restorePosition();
 
                 }
                 @Override
@@ -195,7 +199,8 @@ public class MainActivity extends AppCompatActivity {
                 adapter= new MovieAdapter(getApplicationContext(),movieResults);
                 adapter.setFavs(movieResults);
                 recyclerView.setAdapter(adapter);
-                recyclerView.smoothScrollToPosition(0);
+               // recyclerView.smoothScrollToPosition(0);
+                restorePosition();
             }
         });
     }
@@ -246,22 +251,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        mBundleRecyclerViewState = new Bundle();
-        Parcelable listState = recyclerView.getLayoutManager().onSaveInstanceState();
-        mBundleRecyclerViewState.putParcelable(RECYCLER_STATE_KEY, listState);
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        savedRecyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(LIST_STATE, savedRecyclerViewState);
     }
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (mBundleRecyclerViewState != null) {
-            Parcelable listState = mBundleRecyclerViewState.getParcelable(RECYCLER_STATE_KEY);
-            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            savedRecyclerViewState = savedInstanceState.getParcelable(LIST_STATE);
+        }
+    }
+
+    private void restorePosition() {
+        if (savedRecyclerViewState != null) {
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerViewState);
+            savedRecyclerViewState = null;
         }
     }
 
 }
+
+
 
 
 
