@@ -215,7 +215,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "sort by most popular");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(pref_key,popular_key);
-                editor.putInt(RECYCLER_STATE_KEY,recyclerView.getScrollState());
                 editor.apply();
                 loadJSON();
                 item.setChecked(true);
@@ -226,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG,"sort by top rated");
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(pref_key,top_rated_key);
-                editor.putInt(RECYCLER_STATE_KEY,recyclerView.getScrollState());
                 editor.apply();
                 loadJSON1();
                 item.setChecked(true);
@@ -236,7 +234,6 @@ public class MainActivity extends AppCompatActivity {
             case (R.id.favorites_sorting):{
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(pref_key,Favorite);
-                editor.putInt(RECYCLER_STATE_KEY,recyclerView.getScrollState());
                 editor.apply();
                 getFavorite();
                 item.setChecked(true);
