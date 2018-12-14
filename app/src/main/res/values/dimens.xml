@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="headers">25sp</dimen>
+    <dimen name="movie_title">20sp</dimen>
+    <dimen name="description">15sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="card_movie_radius">0dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="main_poster_height">250dp</dimen>
+    <dimen name="padding_layout">16dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
+    <dimen name="trailes_size">25sp</dimen>
+    <dimen name="youtube_width">50dp</dimen>
+    <dimen name="youtube_height">80dp</dimen>
+    <dimen name="text_size">15sp</dimen>
+    <dimen name="main_elevation">2dp</dimen>
+    <dimen name="margin_right_star">25dp</dimen>
+    <dimen name="detail_image_width">160dp</dimen>
+    <dimen name="paddingt_movie_item">15dp</dimen>
+    <dimen name="margin_right">60dp</dimen>
+    <dimen name="text_size_movie_item">15sp</dimen>
+</resources>

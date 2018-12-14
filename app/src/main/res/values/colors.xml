@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#37474F</color>
+    <color name="colorPrimaryDark">#263238</color>
+    <color name="colorAccent">#FFD600</color>
+    <color name="title_color">#D50000</color>
+    <color name="background_title">#FFEE58</color>
+    <color name="description">#880E4F</color>
+    <color name="bg_color">#212121</color>
+    <color name="light">#BDBDBD</color>
+    <color name="main_movie_item_bg">#7000</color>
+    <color name="main_movie_item_text_color">#FFF</color>
+
+</resources>
